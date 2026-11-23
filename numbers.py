@@ -6,40 +6,52 @@ numbers = [
     50, 15, 30, 18, 55
 ]
 
-total = 0
 
-for num in numbers:
-    total += num
+def calculate_sum(numbers):
+    total = 0
+    for num in numbers:
+        total += num
+    return total
 
-average = total / len(numbers)
 
-numbers.sort()
+def calculate_mean(numbers):
+    return calculate_sum(numbers) / len(numbers)
 
-length = len(numbers)
 
-if length % 2 == 1:
-    middle = numbers[length // 2]
-else:
-    middle = (numbers[length // 2 - 1] + numbers[length // 2]) / 2
+def calculate_median_mode(numbers):
+    sorted_numbers = sorted(numbers)
+    length = len(sorted_numbers)
 
-frequency = {}
-
-for num in numbers:
-    if num in frequency:
-        frequency[num] += 1
+    if length % 2 == 1:
+        median = sorted_numbers[length // 2]
     else:
-        frequency[num] = 1
+        median = (sorted_numbers[length // 2 - 1] + sorted_numbers[length // 2]) / 2
 
-highest_frequency = max(frequency.values())
+    frequency = {}
 
-most_common = []
+    for num in numbers:
+        if num in frequency:
+            frequency[num] += 1
+        else:
+            frequency[num] = 1
 
-for num, count in frequency.items():
-    if count == highest_frequency:
-        most_common.append(num)
+    highest_frequency = max(frequency.values())
+
+    mode = []
+
+    for num, count in frequency.items():
+        if count == highest_frequency:
+            mode.append(num)
+
+    return median, mode
+
 
 print("Numbers:", numbers)
-print("Sum:", total)
-print("Mean:", average)
-print("Median:", middle)
-print("Mode:", most_common)
+print("Sum:", calculate_sum(numbers))
+print("Mean:", calculate_mean(numbers))
+
+median, mode = calculate_median_mode(numbers)
+
+print("Median:", median)
+print("Mode:", mode)
+
