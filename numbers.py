@@ -1,31 +1,45 @@
 
-from statistics import median, multimode
+numbers = [
+    12, 15, 18, 20, 15,
+    22, 25, 18, 30, 15,
+    35, 40, 22, 18, 45,
+    50, 15, 30, 18, 55
+]
 
-print("LIST STATISTICS PROGRAM")
+total = 0
 
-user_input = input("Enter numbers separated by commas: ")
+for num in numbers:
+    total += num
 
-try:
-    numbers = [float(num.strip()) for num in user_input.split(",")]
+average = total / len(numbers)
 
-    if not numbers:
-        raise ValueError
+numbers.sort()
 
-    
-    total = sum(numbers)
-    average = total / len(numbers)
-    middle = median(numbers)
-    most_common = multimode(numbers)
+length = len(numbers)
 
-    
-    print("\n========== RESULTS ==========")
-    print("Numbers:", numbers)
-    print("Sum:", total)
-    print("Average (Mean):", average)
-    print("Median:", middle)
-    print("Mode:", most_common)
-    print("=============================")
+if length % 2 == 1:
+    middle = numbers[length // 2]
+else:
+    middle = (numbers[length // 2 - 1] + numbers[length // 2]) / 2
 
-except ValueError:
-    print("Invalid input! Please enter valid numbers separated by commas.")
-  
+frequency = {}
+
+for num in numbers:
+    if num in frequency:
+        frequency[num] += 1
+    else:
+        frequency[num] = 1
+
+highest_frequency = max(frequency.values())
+
+most_common = []
+
+for num, count in frequency.items():
+    if count == highest_frequency:
+        most_common.append(num)
+
+print("Numbers:", numbers)
+print("Sum:", total)
+print("Mean:", average)
+print("Median:", middle)
+print("Mode:", most_common)
