@@ -1,22 +1,31 @@
 
-from statistics import median, mode, multimode
+from statistics import median, multimode
 
-numbers = [10, 20, 30, 40, 20, 50, 20]
+print("LIST STATISTICS PROGRAM")
 
+user_input = input("Enter numbers separated by commas: ")
 
-total = sum(numbers)
+try:
+    numbers = [float(num.strip()) for num in user_input.split(",")]
 
+    if not numbers:
+        raise ValueError
 
-average = sum(numbers) / len(numbers)
+    
+    total = sum(numbers)
+    average = total / len(numbers)
+    middle = median(numbers)
+    most_common = multimode(numbers)
 
+    
+    print("\n========== RESULTS ==========")
+    print("Numbers:", numbers)
+    print("Sum:", total)
+    print("Average (Mean):", average)
+    print("Median:", middle)
+    print("Mode:", most_common)
+    print("=============================")
 
-middle = median(numbers)
-
-
-most_common = multimode(numbers)
-
-print("Numbers:", numbers)
-print("Sum:", total)
-print("Average (Mean):", average)
-print("Median:", middle)
-print("Mode:", most_common)
+except ValueError:
+    print("Invalid input! Please enter valid numbers separated by commas.")
+  
